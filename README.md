@@ -2,7 +2,7 @@
 
 [日本語](README.ja.md)
 
-Live site: https://bad-apple-earth-map.ikutotest.xyz/ · Video: https://youtu.be/kB3fzm_Un2g
+Live site: https://bad-apple-earth-map.ikutotest.xyz/
 
 A map of every frame of *Bad Apple!! but every frame is real land & water on Earth*. Each frame of the animation was matched to a real piece of the Earth's land and water. This site draws the exact area (drawn extent) of every one of those views and gives its country or territory, continent and frames.
 
