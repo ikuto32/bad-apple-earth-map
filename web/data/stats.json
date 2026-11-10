@@ -1,0 +1,1038 @@
+{
+ "matched_frames": 6562,
+ "views": 6355,
+ "places": 1680,
+ "countries": 138,
+ "continents": 7,
+ "open_ocean_frames": 0,
+ "water_assigned_views": 941,
+ "mirrored_views": 2719,
+ "width_km_min": 0.7024020526556428,
+ "width_km_median": 5.834299676764193,
+ "width_km_max": 802.4328864523623,
+ "total_view_area_km2": 24201181.38788185,
+ "by_continent": [
+  {
+   "continent": "Asia",
+   "frames": 2080,
+   "views": 2074,
+   "places": 582,
+   "area_km2": 11533194.855978778
+  },
+  {
+   "continent": "North America",
+   "frames": 1746,
+   "views": 1737,
+   "places": 457,
+   "area_km2": 3914687.9163532355
+  },
+  {
+   "continent": "Europe",
+   "frames": 909,
+   "views": 887,
+   "places": 234,
+   "area_km2": 2525877.522828448
+  },
+  {
+   "continent": "Oceania",
+   "frames": 860,
+   "views": 751,
+   "places": 164,
+   "area_km2": 4057093.101800404
+  },
+  {
+   "continent": "Africa",
+   "frames": 477,
+   "views": 418,
+   "places": 108,
+   "area_km2": 1801556.1042221282
+  },
+  {
+   "continent": "South America",
+   "frames": 460,
+   "views": 458,
+   "places": 125,
+   "area_km2": 288595.53640987317
+  },
+  {
+   "continent": "Antarctica",
+   "frames": 30,
+   "views": 30,
+   "places": 10,
+   "area_km2": 80176.35028896175
+  }
+ ],
+ "by_country": [
+  {
+   "country": "Russia",
+   "frames": 1110,
+   "views": 1106,
+   "places": 251,
+   "continent": "Asia"
+  },
+  {
+   "country": "Canada",
+   "frames": 1029,
+   "views": 1021,
+   "places": 240,
+   "continent": "North America"
+  },
+  {
+   "country": "Australia",
+   "frames": 334,
+   "views": 333,
+   "places": 84,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Indonesia",
+   "frames": 266,
+   "views": 266,
+   "places": 81,
+   "continent": "Asia"
+  },
+  {
+   "country": "Mexico",
+   "frames": 239,
+   "views": 238,
+   "places": 30,
+   "continent": "North America"
+  },
+  {
+   "country": "United States of America",
+   "frames": 210,
+   "views": 210,
+   "places": 96,
+   "continent": "North America"
+  },
+  {
+   "country": "Papua New Guinea",
+   "frames": 190,
+   "views": 190,
+   "places": 27,
+   "continent": "Oceania"
+  },
+  {
+   "country": "China",
+   "frames": 183,
+   "views": 181,
+   "places": 56,
+   "continent": "Asia"
+  },
+  {
+   "country": "Greenland",
+   "frames": 159,
+   "views": 159,
+   "places": 52,
+   "continent": "North America"
+  },
+  {
+   "country": "Brazil",
+   "frames": 158,
+   "views": 158,
+   "places": 36,
+   "continent": "South America"
+  },
+  {
+   "country": "Argentina",
+   "frames": 143,
+   "views": 141,
+   "places": 39,
+   "continent": "South America"
+  },
+  {
+   "country": "Japan",
+   "frames": 124,
+   "views": 124,
+   "places": 32,
+   "continent": "Asia"
+  },
+  {
+   "country": "Norway",
+   "frames": 109,
+   "views": 97,
+   "places": 37,
+   "continent": "Europe"
+  },
+  {
+   "country": "Kiribati",
+   "frames": 108,
+   "views": 1,
+   "places": 1,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Solomon Islands",
+   "frames": 107,
+   "views": 107,
+   "places": 10,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Philippines",
+   "frames": 88,
+   "views": 88,
+   "places": 30,
+   "continent": "Asia"
+  },
+  {
+   "country": "Sweden",
+   "frames": 88,
+   "views": 87,
+   "places": 21,
+   "continent": "Europe"
+  },
+  {
+   "country": "Iran",
+   "frames": 84,
+   "views": 84,
+   "places": 21,
+   "continent": "Asia"
+  },
+  {
+   "country": "Greece",
+   "frames": 74,
+   "views": 72,
+   "places": 13,
+   "continent": "Europe"
+  },
+  {
+   "country": "Kazakhstan",
+   "frames": 70,
+   "views": 70,
+   "places": 30,
+   "continent": "Asia"
+  },
+  {
+   "country": "Angola",
+   "frames": 69,
+   "views": 66,
+   "places": 3,
+   "continent": "Africa"
+  },
+  {
+   "country": "Cyprus",
+   "frames": 61,
+   "views": 61,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Republic of the Congo",
+   "frames": 58,
+   "views": 3,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Turkmenistan",
+   "frames": 54,
+   "views": 54,
+   "places": 8,
+   "continent": "Asia"
+  },
+  {
+   "country": "Comoros",
+   "frames": 52,
+   "views": 52,
+   "places": 4,
+   "continent": "Africa"
+  },
+  {
+   "country": "Spain",
+   "frames": 52,
+   "views": 52,
+   "places": 17,
+   "continent": "Europe"
+  },
+  {
+   "country": "East Timor",
+   "frames": 51,
+   "views": 51,
+   "places": 4,
+   "continent": "Asia"
+  },
+  {
+   "country": "Chile",
+   "frames": 43,
+   "views": 43,
+   "places": 16,
+   "continent": "South America"
+  },
+  {
+   "country": "Italy",
+   "frames": 40,
+   "views": 40,
+   "places": 12,
+   "continent": "Europe"
+  },
+  {
+   "country": "Bolivia",
+   "frames": 39,
+   "views": 39,
+   "places": 10,
+   "continent": "South America"
+  },
+  {
+   "country": "Tunisia",
+   "frames": 37,
+   "views": 36,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Finland",
+   "frames": 36,
+   "views": 33,
+   "places": 9,
+   "continent": "Europe"
+  },
+  {
+   "country": "French Polynesia",
+   "frames": 36,
+   "views": 36,
+   "places": 11,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Venezuela",
+   "frames": 36,
+   "views": 36,
+   "places": 7,
+   "continent": "South America"
+  },
+  {
+   "country": "United Republic of Tanzania",
+   "frames": 34,
+   "views": 34,
+   "places": 11,
+   "continent": "Africa"
+  },
+  {
+   "country": "Germany",
+   "frames": 33,
+   "views": 30,
+   "places": 1,
+   "continent": "Europe"
+  },
+  {
+   "country": "India",
+   "frames": 32,
+   "views": 32,
+   "places": 21,
+   "continent": "Asia"
+  },
+  {
+   "country": "United Kingdom",
+   "frames": 32,
+   "views": 32,
+   "places": 10,
+   "continent": "Europe"
+  },
+  {
+   "country": "Antarctica",
+   "frames": 30,
+   "views": 30,
+   "places": 10,
+   "continent": "Antarctica"
+  },
+  {
+   "country": "Denmark",
+   "frames": 29,
+   "views": 28,
+   "places": 7,
+   "continent": "Europe"
+  },
+  {
+   "country": "Kenya",
+   "frames": 29,
+   "views": 29,
+   "places": 4,
+   "continent": "Africa"
+  },
+  {
+   "country": "Pakistan",
+   "frames": 29,
+   "views": 29,
+   "places": 10,
+   "continent": "Asia"
+  },
+  {
+   "country": "Iraq",
+   "frames": 27,
+   "views": 27,
+   "places": 8,
+   "continent": "Asia"
+  },
+  {
+   "country": "New Caledonia",
+   "frames": 27,
+   "views": 26,
+   "places": 5,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Dominican Republic",
+   "frames": 25,
+   "views": 25,
+   "places": 6,
+   "continent": "North America"
+  },
+  {
+   "country": "Sri Lanka",
+   "frames": 23,
+   "views": 23,
+   "places": 4,
+   "continent": "Asia"
+  },
+  {
+   "country": "Northern Cyprus",
+   "frames": 22,
+   "views": 22,
+   "places": 3,
+   "continent": "Asia"
+  },
+  {
+   "country": "Portugal",
+   "frames": 22,
+   "views": 22,
+   "places": 11,
+   "continent": "Europe"
+  },
+  {
+   "country": "Mozambique",
+   "frames": 21,
+   "views": 21,
+   "places": 9,
+   "continent": "Africa"
+  },
+  {
+   "country": "Oman",
+   "frames": 21,
+   "views": 21,
+   "places": 10,
+   "continent": "Asia"
+  },
+  {
+   "country": "Egypt",
+   "frames": 20,
+   "views": 20,
+   "places": 8,
+   "continent": "Africa"
+  },
+  {
+   "country": "Sudan",
+   "frames": 20,
+   "views": 20,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "South Korea",
+   "frames": 19,
+   "views": 19,
+   "places": 8,
+   "continent": "Asia"
+  },
+  {
+   "country": "Colombia",
+   "frames": 18,
+   "views": 18,
+   "places": 6,
+   "continent": "South America"
+  },
+  {
+   "country": "Panama",
+   "frames": 18,
+   "views": 18,
+   "places": 6,
+   "continent": "North America"
+  },
+  {
+   "country": "France",
+   "frames": 17,
+   "views": 17,
+   "places": 8,
+   "continent": "Europe"
+  },
+  {
+   "country": "Algeria",
+   "frames": 16,
+   "views": 16,
+   "places": 8,
+   "continent": "Africa"
+  },
+  {
+   "country": "Croatia",
+   "frames": 16,
+   "views": 16,
+   "places": 8,
+   "continent": "Europe"
+  },
+  {
+   "country": "Myanmar",
+   "frames": 16,
+   "views": 16,
+   "places": 6,
+   "continent": "Asia"
+  },
+  {
+   "country": "Haiti",
+   "frames": 15,
+   "views": 15,
+   "places": 3,
+   "continent": "North America"
+  },
+  {
+   "country": "Netherlands",
+   "frames": 15,
+   "views": 15,
+   "places": 4,
+   "continent": "Europe"
+  },
+  {
+   "country": "Iceland",
+   "frames": 14,
+   "views": 14,
+   "places": 6,
+   "continent": "Europe"
+  },
+  {
+   "country": "New Zealand",
+   "frames": 14,
+   "views": 14,
+   "places": 5,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Puerto Rico",
+   "frames": 14,
+   "views": 14,
+   "places": 2,
+   "continent": "North America"
+  },
+  {
+   "country": "Democratic Republic of the Congo",
+   "frames": 13,
+   "views": 13,
+   "places": 7,
+   "continent": "Africa"
+  },
+  {
+   "country": "Peru",
+   "frames": 13,
+   "views": 13,
+   "places": 8,
+   "continent": "South America"
+  },
+  {
+   "country": "Tonga",
+   "frames": 13,
+   "views": 13,
+   "places": 3,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Fiji",
+   "frames": 12,
+   "views": 12,
+   "places": 6,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Malaysia",
+   "frames": 12,
+   "views": 12,
+   "places": 6,
+   "continent": "Asia"
+  },
+  {
+   "country": "Saudi Arabia",
+   "frames": 12,
+   "views": 12,
+   "places": 6,
+   "continent": "Asia"
+  },
+  {
+   "country": "Madagascar",
+   "frames": 11,
+   "views": 11,
+   "places": 5,
+   "continent": "Africa"
+  },
+  {
+   "country": "Trinidad and Tobago",
+   "frames": 11,
+   "views": 11,
+   "places": 3,
+   "continent": "North America"
+  },
+  {
+   "country": "Taiwan",
+   "frames": 10,
+   "views": 10,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Ukraine",
+   "frames": 10,
+   "views": 10,
+   "places": 6,
+   "continent": "Europe"
+  },
+  {
+   "country": "Mali",
+   "frames": 9,
+   "views": 9,
+   "places": 3,
+   "continent": "Africa"
+  },
+  {
+   "country": "Mongolia",
+   "frames": 9,
+   "views": 9,
+   "places": 7,
+   "continent": "Asia"
+  },
+  {
+   "country": "Botswana",
+   "frames": 8,
+   "views": 8,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Eritrea",
+   "frames": 8,
+   "views": 8,
+   "places": 4,
+   "continent": "Africa"
+  },
+  {
+   "country": "Nigeria",
+   "frames": 8,
+   "views": 8,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Poland",
+   "frames": 8,
+   "views": 8,
+   "places": 5,
+   "continent": "Europe"
+  },
+  {
+   "country": "The Bahamas",
+   "frames": 8,
+   "views": 8,
+   "places": 6,
+   "continent": "North America"
+  },
+  {
+   "country": "Uganda",
+   "frames": 8,
+   "views": 8,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Cook Islands",
+   "frames": 7,
+   "views": 7,
+   "places": 3,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Maldives",
+   "frames": 7,
+   "views": 7,
+   "places": 3,
+   "continent": "Asia"
+  },
+  {
+   "country": "South Africa",
+   "frames": 7,
+   "views": 7,
+   "places": 6,
+   "continent": "Africa"
+  },
+  {
+   "country": "Zimbabwe",
+   "frames": 7,
+   "views": 7,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Afghanistan",
+   "frames": 6,
+   "views": 6,
+   "places": 3,
+   "continent": "Asia"
+  },
+  {
+   "country": "Cuba",
+   "frames": 6,
+   "views": 6,
+   "places": 5,
+   "continent": "North America"
+  },
+  {
+   "country": "Estonia",
+   "frames": 6,
+   "views": 6,
+   "places": 3,
+   "continent": "Europe"
+  },
+  {
+   "country": "Ethiopia",
+   "frames": 6,
+   "views": 6,
+   "places": 3,
+   "continent": "Africa"
+  },
+  {
+   "country": "Namibia",
+   "frames": 6,
+   "views": 6,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Tajikistan",
+   "frames": 6,
+   "views": 6,
+   "places": 2,
+   "continent": "Asia"
+  },
+  {
+   "country": "Turkey",
+   "frames": 6,
+   "views": 6,
+   "places": 3,
+   "continent": "Asia"
+  },
+  {
+   "country": "Vietnam",
+   "frames": 6,
+   "views": 6,
+   "places": 4,
+   "continent": "Asia"
+  },
+  {
+   "country": "Ecuador",
+   "frames": 5,
+   "views": 5,
+   "places": 1,
+   "continent": "South America"
+  },
+  {
+   "country": "Switzerland",
+   "frames": 5,
+   "views": 5,
+   "places": 2,
+   "continent": "Europe"
+  },
+  {
+   "country": "Yemen",
+   "frames": 5,
+   "views": 5,
+   "places": 2,
+   "continent": "Asia"
+  },
+  {
+   "country": "Hungary",
+   "frames": 4,
+   "views": 4,
+   "places": 3,
+   "continent": "Europe"
+  },
+  {
+   "country": "Israel",
+   "frames": 4,
+   "views": 4,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Samoa",
+   "frames": 4,
+   "views": 4,
+   "places": 3,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Belarus",
+   "frames": 3,
+   "views": 3,
+   "places": 1,
+   "continent": "Europe"
+  },
+  {
+   "country": "Bulgaria",
+   "frames": 3,
+   "views": 3,
+   "places": 3,
+   "continent": "Europe"
+  },
+  {
+   "country": "Dominica",
+   "frames": 3,
+   "views": 3,
+   "places": 1,
+   "continent": "North America"
+  },
+  {
+   "country": "Faroe Islands",
+   "frames": 3,
+   "views": 3,
+   "places": 1,
+   "continent": "Europe"
+  },
+  {
+   "country": "Ireland",
+   "frames": 3,
+   "views": 3,
+   "places": 1,
+   "continent": "Europe"
+  },
+  {
+   "country": "Kyrgyzstan",
+   "frames": 3,
+   "views": 3,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Syria",
+   "frames": 3,
+   "views": 3,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Thailand",
+   "frames": 3,
+   "views": 3,
+   "places": 2,
+   "continent": "Asia"
+  },
+  {
+   "country": "Vanuatu",
+   "frames": 3,
+   "views": 3,
+   "places": 2,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Zambia",
+   "frames": 3,
+   "views": 3,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Austria",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "Europe"
+  },
+  {
+   "country": "Barbados",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "North America"
+  },
+  {
+   "country": "Burkina Faso",
+   "frames": 2,
+   "views": 2,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Honduras",
+   "frames": 2,
+   "views": 2,
+   "places": 2,
+   "continent": "North America"
+  },
+  {
+   "country": "Ivory Coast",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Malawi",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Marshall Islands",
+   "frames": 2,
+   "views": 2,
+   "places": 2,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Mauritius",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Morocco",
+   "frames": 2,
+   "views": 2,
+   "places": 2,
+   "continent": "Africa"
+  },
+  {
+   "country": "Northern Mariana Islands",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Saint Lucia",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "North America"
+  },
+  {
+   "country": "Uruguay",
+   "frames": 2,
+   "views": 2,
+   "places": 1,
+   "continent": "South America"
+  },
+  {
+   "country": "Uzbekistan",
+   "frames": 2,
+   "views": 2,
+   "places": 2,
+   "continent": "Asia"
+  },
+  {
+   "country": "Ashmore and Cartier Islands",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Oceania"
+  },
+  {
+   "country": "Benin",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Equatorial Guinea",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Ghana",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Grenada",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "North America"
+  },
+  {
+   "country": "Guinea-Bissau",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Guyana",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "South America"
+  },
+  {
+   "country": "Laos",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Libya",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "North Korea",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Asia"
+  },
+  {
+   "country": "Saint Vincent and the Grenadines",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "North America"
+  },
+  {
+   "country": "Somalia",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "Somaliland",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "South Sudan",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Africa"
+  },
+  {
+   "country": "United Arab Emirates",
+   "frames": 1,
+   "views": 1,
+   "places": 1,
+   "continent": "Asia"
+  }
+ ],
+ "method_counts": {
+  "nearest-within-200nmi": 941,
+  "land-overlap": 5414
+ },
+ "elapsed_seconds": 80.7626708000007
+}

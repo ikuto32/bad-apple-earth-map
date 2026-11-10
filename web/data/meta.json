@@ -1,0 +1,22 @@
+{
+ "build": "2026-11-10T06:16:34Z",
+ "youtube_id": "nw02Enk8o1I",
+ "fps": 30,
+ "total_frames": 6955,
+ "matched_frames": 6562,
+ "continent_colors": {
+  "Asia": "#e9a73f",
+  "North America": "#4fc3d9",
+  "Europe": "#9c86ee",
+  "Oceania": "#5fd08a",
+  "Africa": "#ea7660",
+  "South America": "#e4d260",
+  "Antarctica": "#cfdbe3",
+  "Open ocean": "#6f93b0"
+ },
+ "thumbnails": true,
+ "thumbnail_size": [
+  160,
+  120
+ ]
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bad Apple!! Real Earth Map</title>
+<meta name="description" content="Every frame of the Bad Apple!! land/water edition: where on Earth each view is, with country, continent, frames and drawn extent.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23080f17'/%3E%3Cpath d='M7 22c3-9 8-13 18-12-5 3-7 7-8 13z' fill='%23f1eee6'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="vendor/maplibre-gl-5.24.0/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="panel">
+    <header class="brand">
+      <div class="title-row">
+        <h1>BAD APPLE <span>/ REAL EARTH</span></h1>
+        <div class="lang" role="group" aria-label="Language">
+          <button data-lang="en" aria-pressed="true">EN</button><button data-lang="ja" aria-pressed="false">日本語</button>
+        </div>
+      </div>
+      <p class="lede" data-i18n="lede">Every matched frame of the land &amp; water edition, placed where it really is on Earth.</p>
+    </header>
+    <div id="tiles" class="tiles"></div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="overview" aria-selected="true" data-i18n="tabOverview">Overview</button>
+      <button role="tab" data-tab="countries" aria-selected="false" data-i18n="tabCountries">Countries</button>
+      <button role="tab" data-tab="frames" aria-selected="false" data-i18n="tabFrames">Frames</button>
+      <button role="tab" data-tab="about" aria-selected="false" data-i18n="tabAbout">About</button>
+    </nav>
+    <div id="filters" class="filters" hidden></div>
+    <section id="tab-overview" class="tab" role="tabpanel">
+      <h2 data-i18n="byContinent">By continent</h2>
+      <p class="hint" data-i18n="continentHint">Click a continent to show or hide it on the map.</p>
+      <div id="continents" class="bars"></div>
+      <div class="actions">
+        <button id="near-me" class="primary" data-i18n="nearMe">Frames near me</button>
+        <span class="hint" data-i18n="clickHint">or click anywhere on the map</span>
+      </div>
+      <div id="facts" class="facts"></div>
+    </section>
+    <section id="tab-countries" class="tab" role="tabpanel" hidden>
+      <input id="country-search" class="search" type="search" autocomplete="off" data-i18n-placeholder="searchCountry" placeholder="Search countries & territories">
+      <div class="table-head country-row">
+        <button data-sort="name" data-i18n="colCountry">Country / territory</button>
+        <button data-sort="frames" class="num" data-i18n="colFrames">Frames</button>
+        <button data-sort="places" class="num" data-i18n="colPlaces">Places</button>
+        <button data-sort="views" class="num" data-i18n="colViews">Views</button>
+      </div>
+      <div id="country-list" class="list"></div>
+    </section>
+    <section id="tab-frames" class="tab" role="tabpanel" hidden>
+      <div class="frames-tools">
+        <input id="frame-search" class="search" type="search" autocomplete="off" data-i18n-placeholder="searchFrame" placeholder="Frame number or country">
+        <a class="download" href="data/frames.csv" download data-i18n="downloadCsv">CSV</a>
+      </div>
+      <div class="table-head frame-row">
+        <span data-i18n="colFrame">Frame</span><span data-i18n="colTime">Time</span><span data-i18n="colCountry">Country / territory</span><span class="num">mIoU</span>
+      </div>
+      <div id="frame-list" class="list virtual"><div class="spacer"></div></div>
+      <p id="frame-count" class="hint"></p>
+    </section>
+    <section id="tab-about" class="tab" role="tabpanel" hidden>
+      <div id="about"></div>
+    </section>
+  </aside>
+  <main id="map-wrap">
+    <div id="map" aria-label="Map of every view"></div>
+    <div id="tooltip" class="tooltip" hidden></div>
+    <section id="details" class="details" hidden aria-live="polite"></section>
+    <div id="timeline" class="timeline">
+      <button id="play" aria-label="Play" class="play">▶</button>
+      <input id="time" type="range" min="0" step="1" value="0" aria-label="Show views up to this frame">
+      <output id="time-label"></output>
+    </div>
+  </main>
+</div>
+<script src="vendor/maplibre-gl-5.24.0/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
