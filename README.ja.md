@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-サイト: https://bad-apple-earth-map.ikutotest.xyz/
+サイト: https://bad-apple-earth-map.ikutotest.xyz/ · 動画: https://youtu.be/kB3fzm_Un2g
 
 動画「Bad Apple!! but every frame is real land & water on Earth」の全フレームの場所を示す地図です。アニメの各フレームは、地球上の実在する陸と水の範囲にマッチしています。このサイトでは、その全ビューの範囲（描画範囲）を地図に描き、国・地域、大陸、フレームを示します。
 
