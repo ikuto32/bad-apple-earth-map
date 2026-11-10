@@ -4,7 +4,7 @@ const INITIAL_HASH = location.hash; // read before MapLibre adds its own map= pa
 
 const STRINGS = {
   en: {
-    lede: 'Every matched frame of the land & water edition, placed where it really is on Earth.',
+    lede: 'Every frame of “Bad Apple!! but every frame is a real place on Earth”, placed where it really is.',
     tabOverview: 'Overview', tabCountries: 'Countries', tabFrames: 'Frames', tabAbout: 'About',
     byContinent: 'By continent', continentHint: 'Click a continent to show or hide it on the map.',
     nearMe: 'Frames near me', clickHint: 'or click anywhere on the map',
@@ -20,12 +20,13 @@ const STRINGS = {
     methodLand: 'largest land overlap', methodNearest: 'open water · nearest country ≤ 200 nmi', methodOcean: 'open ocean',
     disputedNote: 'Disputed area', original: 'original', matched: 'matched land / water',
     openOsm: 'OpenStreetMap', watchAt: 'Watch on YouTube', nearestHere: 'Nearest views to this point', nearestYou: 'Nearest views to you',
-    kmAway: 'km', geoError: 'Your location is not available in this browser.', creditsRow: 'Ending credits — statistics card',
+    kmAway: 'km', geoError: 'Your location is not available in this browser.', creditsRow: 'Ending credits · fixed view', creditsShort: 'credits',
+    creditsNote: 'Ending credits: the video holds this one view (no match score). Not counted in the statistics.', na: 'n/a',
     timeAll: 'all frames', timeUpTo: 'up to frame', resultCount: (n, t) => `${n.toLocaleString()} of ${t.toLocaleString()} frames`,
     shareInPlace: (n) => `${n} views in this place`, showPlace: 'Show place',
   },
   ja: {
-    lede: 'Land & Water 版の全マッチフレームを、地球上の実際の場所に配置したマップです。',
+    lede: '「Bad Apple!! 全フレームを地球上の実在する場所で再現」の全フレームを、実際の場所に配置したマップです。',
     tabOverview: '概要', tabCountries: '国・地域', tabFrames: 'フレーム', tabAbout: '説明',
     byContinent: '大陸別', continentHint: '大陸をクリックすると地図上の表示を切り替えます。',
     nearMe: '現在地の近くのフレーム', clickHint: '地図をクリックしても探せます',
@@ -41,7 +42,8 @@ const STRINGS = {
     methodLand: '陸地の重なりが最大', methodNearest: '水域・200海里以内の最寄りの国', methodOcean: '外洋',
     disputedNote: '係争地', original: '元の影絵', matched: 'マッチした陸と水',
     openOsm: 'OpenStreetMap', watchAt: 'YouTubeで見る', nearestHere: 'この地点に近いビュー', nearestYou: '現在地に近いビュー',
-    kmAway: 'km', geoError: 'このブラウザでは現在地を取得できません。', creditsRow: 'エンディング — 統計表示',
+    kmAway: 'km', geoError: 'このブラウザでは現在地を取得できません。', creditsRow: 'エンディング・固定ビュー', creditsShort: 'エンディング',
+    creditsNote: 'エンディング: 動画はこの1つのビューを表示し続けます（一致度なし）。統計には含めていません。', na: '—',
     timeAll: '全フレーム', timeUpTo: 'フレーム', resultCount: (n, t) => `${t.toLocaleString()} フレーム中 ${n.toLocaleString()}`,
     shareInPlace: (n) => `この地点のビュー ${n}`, showPlace: '地点を表示',
   },
@@ -76,13 +78,14 @@ async function load() {
   const col = Object.fromEntries(views.columns.map((c, i) => [c, i]));
   state.views = views.rows.map((r) => {
     const v = {}; for (const [k, i] of Object.entries(col)) v[k] = r[i];
-    v.frames = v.frame_ranges.reduce((n, [a, b]) => n + b - a + 1, 0); v.first = v.frame_ranges[0][0]; v.ring = unwrap(v.corners); return v;
+    v.frames = v.frame_ranges.reduce((n, [a, b]) => n + b - a + 1, 0); v.first = v.frame_ranges[0][0]; v.ring = unwrap(v.corners); v.credits = !!v.credits; return v;
   });
   state.frameView = frames.rows.map((r) => r[0]); state.frameScore = frames.rows.map((r) => r[1]);
   state.continents = new Set(views.continents.map((_, k) => k));
-  state.byPlace = new Map(); for (const v of state.views) { if (!state.byPlace.has(v.place)) state.byPlace.set(v.place, []); state.byPlace.get(v.place).push(v); }
+  state.byPlace = new Map(); for (const v of state.views) { if (v.credits) continue; if (!state.byPlace.has(v.place)) state.byPlace.set(v.place, []); state.byPlace.get(v.place).push(v); }
   const agg = new Map();
   for (const v of state.views) {
+    if (v.credits) continue;  // ending credits: shown, not counted
     const a = agg.get(v.country) || { k: v.country, frames: 0, views: 0, places: new Set(), continent: new Map() };
     a.frames += v.frames; a.views++; a.places.add(v.place); a.continent.set(v.continent, (a.continent.get(v.continent) || 0) + v.frames); agg.set(v.country, a);
   }
@@ -197,7 +200,7 @@ function renderDetails() {
   if (!v) { box.hidden = true; return; }
   const ranges = v.frame_ranges.map(([a, b]) => `<a href="${youtube(a)}" target="_blank" rel="noopener">#${fmt(a + 1)}${b > a ? '–' + fmt(b + 1) : ''}</a> <span class="muted">${timeOf(a)}</span>`).join(' · ');
   const shares = v.country_shares.length > 1 ? v.country_shares.map(([c, s]) => `${esc(state.lang === 'ja' ? state.data.countries_ja[state.data.countries.indexOf(c)] ?? c : c)} ${fmt(s * 100)}%`).join(', ') : null;
-  const [lon, lat] = v.centre; const placeViews = state.byPlace.get(v.place);
+  const [lon, lat] = v.centre; const placeViews = state.byPlace.get(v.place) || [];
   const zoom = Math.max(4, Math.min(14, Math.round(Math.log2(40075 * Math.cos(lat * Math.PI / 180) / v.width_km) - 1)));
   const thumb = state.meta.thumbnails ? `<img src="data/thumbs/${String(v.id).padStart(5, '0')}.png" alt="" loading="lazy" width="324" height="120">
     <div class="caption"><span>${T('original')} · ${T('frame')} ${fmt(v.first + 1)}</span><span>${T('matched')}</span></div>` : '';
@@ -206,6 +209,7 @@ function renderDetails() {
       <button class="close" aria-label="Close">×</button></div>${thumb}
     <dl>
       <dt>${T('framesShown')}</dt><dd class="frames">${ranges}</dd>
+      ${v.credits ? `<dt></dt><dd class="muted">${T('creditsNote')}</dd>` : ''}
       ${v.disputed ? `<dt>${T('disputedNote')}</dt><dd>${esc(v.disputed)} <span class="muted">(${esc(v.disputed_note || '')})</span></dd>` : ''}
       ${shares ? `<dt>${T('country')}</dt><dd>${shares}</dd>` : ''}
       <dt>${T('assignment')}</dt><dd>${methodText(v)}</dd>
@@ -213,9 +217,9 @@ function renderDetails() {
       <dt>${T('centre')}</dt><dd>${Math.abs(lat).toFixed(5)}° ${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(5)}° ${lon >= 0 ? 'E' : 'W'}</dd>
       <dt>${T('width')}</dt><dd>${fmt(v.width_km, v.width_km < 10 ? 2 : 1)} km · ${T('area')} ${fmt(v.area_km2)} km²</dd>
       <dt>${T('rotation')}</dt><dd>${fmt(v.rotation, 1)}°${v.mirrored ? ` · <span class="mirror">${T('mirrored')}</span>` : ''}</dd>
-      <dt>${T('matchScore')}</dt><dd>${v.miou.toFixed(3)}</dd>
+      <dt>${T('matchScore')}</dt><dd>${v.miou === null ? T('na') : v.miou.toFixed(3)}</dd>
       <dt>${T('photo')}</dt><dd>${esc(v.imagery)} · ${esc(v.photo_date || '')}</dd>
-      <dt>${T('place')}</dt><dd>#${v.place} · ${T('shareInPlace')(placeViews.length)} ${placeViews.length > 1 ? `<a href="#" data-place="${v.place}">${T('showPlace')}</a>` : ''}</dd>
+      ${v.credits ? '' : `<dt>${T('place')}</dt><dd>#${v.place} · ${T('shareInPlace')(placeViews.length)} ${placeViews.length > 1 ? `<a href="#" data-place="${v.place}">${T('showPlace')}</a>` : ''}</dd>`}
     </dl>
     <div class="links"><a href="${youtube(v.first)}" target="_blank" rel="noopener">${T('watchAt')}</a>
       <a href="https://www.openstreetmap.org/?mlat=${lat.toFixed(5)}&mlon=${lon.toFixed(5)}#map=${zoom}/${lat.toFixed(5)}/${lon.toFixed(5)}" target="_blank" rel="noopener">${T('openOsm')}</a></div>`;
@@ -313,9 +317,10 @@ function renderFrameList(recompute = false) {
   let html = '';
   for (let n = a; n < b; n++) {
     const i = rows[n]; const vid = state.frameView[i]; const v = vid === undefined ? null : state.views[vid];
-    const name = v ? `<span class="dot" style="background:${colorOf(v.continent)}"></span>${esc(countryName(v.country))}${v.territory ? ` <span class="muted">· ${esc(v.territory)}</span>` : ''}` : `<span class="muted">${T('creditsRow')}</span>`;
+    const name = !v ? `<span class="muted">${T('creditsRow')}</span>`
+      : `<span class="dot" style="background:${colorOf(v.continent)}"></span>${esc(countryName(v.country))}${v.territory ? ` <span class="muted">· ${esc(v.territory)}</span>` : ''}${v.credits ? ` <span class="muted">· ${T('creditsShort')}</span>` : ''}`;
     html += `<button class="row frame-row" style="top:${n * h}px" data-frame="${i}" aria-current="${v && state.selected === v.id}">
-      <span class="num">${fmt(i + 1)}</span><span class="num muted">${timeOf(i)}</span><span class="name">${name}</span><span class="num muted">${v ? state.frameScore[i].toFixed(3) : ''}</span></button>`;
+      <span class="num">${fmt(i + 1)}</span><span class="num muted">${timeOf(i)}</span><span class="name">${name}</span><span class="num muted">${v && state.frameScore[i] !== null ? state.frameScore[i].toFixed(3) : T('na')}</span></button>`;
   }
   list.querySelectorAll('.row').forEach((r) => r.remove()); list.insertAdjacentHTML('beforeend', html);
   list.querySelectorAll('[data-frame]').forEach((r) => r.onclick = () => { const vid = state.frameView[+r.dataset.frame]; if (vid !== undefined) select(vid); });
@@ -325,12 +330,12 @@ function renderAbout() {
   const ja = state.lang === 'ja';
   $('#about').className = 'about';
   $('#about').innerHTML = ja ? `
-    <h2>このマップについて</h2><p>動画「Bad Apple!! but every frame is a real place on Earth」の Land &amp; Water 版で、各フレームの影絵に一致した実在の陸と水の範囲（描画範囲）をすべて表示しています。枠の色は大陸です。</p>
-    <h2>国・大陸の判定</h2><p>各ビューの四辺形と Natural Earth 1:10m 行政区分（map units）の陸地の重なりを測地線面積で計算し、最も大きい国・地域を採用しました（事実上の境界。主権に関する立場を示すものではありません）。陸地が2%未満のビューは200海里以内の最も近い国、それより遠い場合は「外洋」です。ロシアはウラル山脈（東経60度）で欧州とアジアに分けています。重なり（IoU）が0.5を超えるビューは同じ「地点」として数えます。エンディングの統計表示部分は数えていません。</p>
+    <h2>このマップについて</h2><p>動画「<a href="https://youtu.be/nw02Enk8o1I">Bad Apple!! 全フレームを地球上の実在する場所で再現（衛星画像）</a>」の全フレームについて、影絵に一致した実在の陸と水の範囲（描画範囲）をすべて表示しています。枠の色は大陸です。フレーム番号と時刻は動画の表示と同じです。</p>
+    <h2>国・大陸の判定</h2><p>各ビューの四辺形と Natural Earth 1:10m 行政区分（map units）の陸地の重なりを測地線面積で計算し、最も大きい国・地域を採用しました（事実上の境界。主権に関する立場を示すものではありません）。陸地が2%未満のビューは200海里以内の最も近い国、それより遠い場合は「外洋」です。ロシアはウラル山脈（東経60度）で欧州とアジアに分けています。重なり（IoU）が0.5を超えるビューは同じ「地点」として数えます。エンディング（フレーム 6,563〜6,955、1つの固定ビュー）は数えていません。</p>
     <h2>データ</h2><p>陸と水: G. E. Kindermann (2025) 全球 0.3秒角 陸水マスク, <a href="https://doi.org/10.5281/zenodo.14899246">doi:10.5281/zenodo.14899246</a>, CC BY 4.0 ／ 境界・地名: <a href="https://www.naturalearthdata.com/">Natural Earth</a>（パブリックドメイン）／ 背景地図: <a href="https://openfreemap.org">OpenFreeMap</a> © <a href="https://openmaptiles.org/">OpenMapTiles</a>, データ © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> ／ 地図表示: <a href="https://maplibre.org/">MapLibre GL JS</a>（BSD-3）</p>
     <p><a href="data/frames.csv" download>全フレームの一覧 (CSV)</a> · <a href="https://github.com/ikuto32/bad-apple-earth-map">ソースコード (GitHub)</a></p>` : `
-    <h2>About this map</h2><p>The land &amp; water edition of “Bad Apple!! but every frame is a real place on Earth”. Each outline is the exact real-world area (drawn extent) whose land and water matched a frame’s silhouette. Colours show the continent.</p>
-    <h2>How countries are assigned</h2><p>Each view’s quadrilateral is intersected with Natural Earth 1:10m admin-0 map units; the country or territory with the largest geodesic land overlap is used (de facto boundaries; no position on sovereignty is implied). Views with under 2 % land take the nearest country within 200 nautical miles, otherwise “Open ocean”. Russia is split at the Urals (60° E). Views overlapping with IoU &gt; 0.5 count as one place. The ending statistics card is not counted.</p>
+    <h2>About this map</h2><p>Every frame of “<a href="https://youtu.be/nw02Enk8o1I">Bad Apple!! but every frame is a real place on Earth (Satellite Imagery)</a>”. Each outline is the exact real-world area (drawn extent) whose land and water matched a frame’s silhouette. Colours show the continent. Frame numbers and times match the video.</p>
+    <h2>How countries are assigned</h2><p>Each view’s quadrilateral is intersected with Natural Earth 1:10m admin-0 map units; the country or territory with the largest geodesic land overlap is used (de facto boundaries; no position on sovereignty is implied). Views with under 2 % land take the nearest country within 200 nautical miles, otherwise “Open ocean”. Russia is split at the Urals (60° E). Views overlapping with IoU &gt; 0.5 count as one place. The ending credits (frames 6,563–6,955, one fixed view) are not counted.</p>
     <h2>Data</h2><p>Land/water: G. E. Kindermann (2025) global 0.3″ land/water mask, <a href="https://doi.org/10.5281/zenodo.14899246">doi:10.5281/zenodo.14899246</a>, CC BY 4.0 · Boundaries &amp; places: <a href="https://www.naturalearthdata.com/">Natural Earth</a> (public domain) · Basemap: <a href="https://openfreemap.org">OpenFreeMap</a> © <a href="https://openmaptiles.org/">OpenMapTiles</a>, data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Map rendering: <a href="https://maplibre.org/">MapLibre GL JS</a> (BSD-3)</p>
     <p><a href="data/frames.csv" download>Every frame as CSV</a> · <a href="https://github.com/ikuto32/bad-apple-earth-map">Source on GitHub</a></p>`;
 }

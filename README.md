@@ -2,9 +2,9 @@
 
 [日本語](README.ja.md)
 
-Live site: https://bad-apple-earth-map.ikutotest.xyz/
+Live site: https://bad-apple-earth-map.ikutotest.xyz/ · Video: https://youtu.be/nw02Enk8o1I
 
-A map of every frame of *Bad Apple!! but every frame is real land & water on Earth*. Each frame of the animation was matched to a real piece of the Earth's land and water. This site draws the exact area (drawn extent) of every one of those views and gives its country or territory, continent and frames.
+A map of every frame of *Bad Apple!! but every frame is a real place on Earth (Satellite Imagery)* ([YouTube](https://youtu.be/nw02Enk8o1I)). Frame numbers and times match the video; the land & water edition ([YouTube](https://youtu.be/kB3fzm_Un2g)) shows the same views. Each frame of the animation was matched to a real piece of the Earth's land and water. This site draws the exact area (drawn extent) of every one of those views and gives its country or territory, continent and frames.
 
 - **Map:** the outline of every view, colored by continent. Click one for its frames (with YouTube timestamp links), country, continent, nearest mapped place, width, rotation, mirroring, match score and photo date, and a thumbnail of the original frame beside the matched land/water.
 - **Countries:** all 138 countries and territories, sortable and searchable, in English or Japanese.
@@ -17,7 +17,7 @@ The site is static: no build step, no server code and no tracking. MapLibre GL J
 
 | | |
 |---|---|
-| Matched frames | 6,562 (the ending credits, frames 6,563–6,955, show the statistics) |
+| Matched frames | 6,562 (the ending credits, frames 6,563–6,955, hold one fixed view and are not counted) |
 | Distinct views | 6,355 |
 | Places (views joined when they overlap by IoU > 0.5) | 1,680 |
 | Countries and territories | 138 |
@@ -33,7 +33,7 @@ Each view's quadrilateral is intersected with Natural Earth 1:10m Admin 0 map un
 |---|---|
 | `web/index.html`, `web/app.js`, `web/style.css` | the site |
 | `web/data/views.json` | every view: corners, frame ranges, country, continent, territory, place, width, rotation, mirroring, mIoU, nearest place, photo date, disputed note, country shares |
-| `web/data/frames.json`, `web/data/frames.csv` | the view of every frame; the CSV has every column for all 6,955 frames |
+| `web/data/frames.json`, `web/data/frames.csv` | the view of every frame, from the video's own per-frame records; the CSV has every column for all 6,955 frames, including the capture dates and imagery shown on screen |
 | `web/data/stats.json` | totals by continent and country |
 | `web/data/thumbs/` | one 324×120 thumbnail per view: the original frame and the matched land/water |
 | `web/vendor/maplibre-gl-5.24.0/` | MapLibre GL JS with its licence |
