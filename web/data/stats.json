@@ -10,56 +10,65 @@
  "width_km_min": 0.7024020526556428,
  "width_km_median": 5.834299676764193,
  "width_km_max": 802.4328864523623,
- "total_view_area_km2": 24201181.38788185,
+ "area_union_km2": 8305925.284836007,
+ "area_union_share_of_earth": 0.016283829115960113,
+ "view_area_sum_km2": 24201181.38788185,
  "by_continent": [
   {
    "continent": "Asia",
    "frames": 2080,
    "views": 2074,
    "places": 582,
-   "area_km2": 11533194.855978778
+   "area_union_km2": 3343895.931416236,
+   "area_sum_km2": 11533194.855978778
   },
   {
    "continent": "North America",
    "frames": 1746,
    "views": 1737,
    "places": 457,
-   "area_km2": 3914687.9163532355
+   "area_union_km2": 1369741.93615121,
+   "area_sum_km2": 3914687.9163532355
   },
   {
    "continent": "Europe",
    "frames": 909,
    "views": 887,
    "places": 234,
-   "area_km2": 2525877.522828448
+   "area_union_km2": 860622.5212972056,
+   "area_sum_km2": 2525877.522828448
   },
   {
    "continent": "Oceania",
    "frames": 860,
    "views": 751,
    "places": 164,
-   "area_km2": 4057093.101800404
+   "area_union_km2": 1735480.6459300034,
+   "area_sum_km2": 4057093.101800404
   },
   {
    "continent": "Africa",
    "frames": 477,
    "views": 418,
    "places": 108,
-   "area_km2": 1801556.1042221282
+   "area_union_km2": 836751.653181653,
+   "area_sum_km2": 1801556.1042221282
   },
   {
    "continent": "South America",
    "frames": 460,
    "views": 458,
    "places": 125,
-   "area_km2": 288595.53640987317
+   "area_union_km2": 147109.4844627144,
+   "area_sum_km2": 288595.53640987317
   },
   {
    "continent": "Antarctica",
    "frames": 30,
    "views": 30,
    "places": 10,
-   "area_km2": 80176.35028896175
+   "area_union_km2": 12689.741394043102,
+   "area_sum_km2": 80176.35028896175
   }
  ],
  "by_country": [

@@ -10,8 +10,8 @@ const STRINGS = {
     nearMe: 'Frames near me', clickHint: 'or click anywhere on the map',
     searchCountry: 'Search countries & territories', searchFrame: 'Frame number or country', downloadCsv: 'CSV',
     colCountry: 'Country / territory', colFrames: 'Frames', colPlaces: 'Places', colViews: 'Views', colFrame: 'Frame', colTime: 'Time',
-    tMatched: 'matched frames', tViews: 'distinct views', tPlaces: 'places', tCountries: 'countries & territories', tContinents: 'continents', tArea: 'million km² shown',
-    fSmallest: 'Smallest view', fMedian: 'Median view', fLargest: 'Largest view', fMirrored: 'Mirrored views', fWater: 'Open-water views', fArea: 'Area shown',
+    tMatched: 'matched frames', tViews: 'distinct views', tPlaces: 'places', tCountries: 'countries & territories', tContinents: 'continents', tArea: 'million km² covered',
+    fSmallest: 'Smallest view', fMedian: 'Median view', fLargest: 'Largest view', fMirrored: 'Mirrored views', fWater: 'Open-water views', fArea: 'Area covered (overlaps removed)',
     kmWide: 'km wide', of: 'of', frames: 'frames', frame: 'frame', places: 'places', views: 'views',
     showingCountry: 'Country', showingPlace: 'Place', clear: 'Clear filter',
     continent: 'Continent', country: 'Country / territory', territory: 'Territory', nearest: 'Nearest mapped place', centre: 'Centre',
@@ -32,8 +32,8 @@ const STRINGS = {
     nearMe: '現在地の近くのフレーム', clickHint: '地図をクリックしても探せます',
     searchCountry: '国・地域を検索', searchFrame: 'フレーム番号または国名', downloadCsv: 'CSV',
     colCountry: '国・地域', colFrames: 'フレーム', colPlaces: '地点', colViews: 'ビュー', colFrame: 'フレーム', colTime: '時刻',
-    tMatched: 'マッチしたフレーム', tViews: '異なるビュー', tPlaces: '地点', tCountries: '国・地域', tContinents: '大陸', tArea: '百万km²',
-    fSmallest: '最小の範囲', fMedian: '範囲の中央値', fLargest: '最大の範囲', fMirrored: '鏡像のビュー', fWater: '水域のビュー', fArea: '表示した面積',
+    tMatched: 'マッチしたフレーム', tViews: '異なるビュー', tPlaces: '地点', tCountries: '国・地域', tContinents: '大陸', tArea: '百万km²（重複を除く）',
+    fSmallest: '最小の範囲', fMedian: '範囲の中央値', fLargest: '最大の範囲', fMirrored: '鏡像のビュー', fWater: '水域のビュー', fArea: '表示した範囲（重複を除く）',
     kmWide: 'km幅', of: '/', frames: 'フレーム', frame: 'フレーム', places: '地点', views: 'ビュー',
     showingCountry: '国・地域', showingPlace: '地点', clear: '解除',
     continent: '大陸', country: '国・地域', territory: '地域', nearest: '最寄りの集落', centre: '中心',
@@ -248,7 +248,7 @@ function showNearest(lon, lat, title) {
 function renderTiles() {
   const s = state.stats;
   $('#tiles').innerHTML = [[s.matched_frames, 'tMatched'], [s.views, 'tViews'], [s.places, 'tPlaces'], [s.countries, 'tCountries'], [s.continents, 'tContinents'],
-    [s.total_view_area_km2 / 1e6, 'tArea', 1]].map(([n, k, d]) => `<div class="tile"><b>${fmt(n, d || 0)}</b><span>${T(k)}</span></div>`).join('');
+    [s.area_union_km2 / 1e6, 'tArea', 1]].map(([n, k, d]) => `<div class="tile"><b>${fmt(n, d || 0)}</b><span>${T(k)}</span></div>`).join('');
 }
 function renderContinents() {
   const rows = state.stats.by_continent.slice().sort((a, b) => (a.continent === 'Open ocean') - (b.continent === 'Open ocean') || b.frames - a.frames);
@@ -263,7 +263,8 @@ function renderContinents() {
     renderContinents(); applyFilters(); renderCountries(); });
   const s = state.stats;
   $('#facts').innerHTML = [[T('fSmallest'), `${fmt(s.width_km_min, 1)} ${T('kmWide')}`], [T('fLargest'), `${fmt(s.width_km_max)} ${T('kmWide')}`],
-    [T('fMedian'), `${fmt(s.width_km_median, 1)} ${T('kmWide')}`], [T('fArea'), `${fmt(s.total_view_area_km2 / 1e6, 1)} ${state.lang === 'ja' ? '百万km²' : 'million km²'}`],
+    [T('fMedian'), `${fmt(s.width_km_median, 1)} ${T('kmWide')}`], [T('fArea'), state.lang === 'ja' ? `${fmt(s.area_union_km2 / 1e6, 1)} 百万km²・地球の表面積の${fmt(s.area_union_share_of_earth * 100, 1)}%`
+      : `${fmt(s.area_union_km2 / 1e6, 1)} million km² · ${fmt(s.area_union_share_of_earth * 100, 1)} % of Earth`],
     [T('fMirrored'), `${fmt(s.mirrored_views)} ${T('of')} ${fmt(s.views)}`], [T('fWater'), fmt(s.water_assigned_views)]]
     .map(([a, b]) => `<div><span>${a}</span>${b}</div>`).join('');
 }
@@ -332,10 +333,12 @@ function renderAbout() {
   $('#about').innerHTML = ja ? `
     <h2>このマップについて</h2><p>動画「<a href="https://youtu.be/nw02Enk8o1I">Bad Apple!! 全フレームを地球上の実在する場所で再現（衛星画像）</a>」の全フレームについて、影絵に一致した実在の陸と水の範囲（描画範囲）をすべて表示しています。枠の色は大陸です。フレーム番号と時刻は動画の表示と同じです。</p>
     <h2>国・大陸の判定</h2><p>各ビューの四辺形と Natural Earth 1:10m 行政区分（map units）の陸地の重なりを測地線面積で計算し、最も大きい国・地域を採用しました（事実上の境界。主権に関する立場を示すものではありません）。陸地が2%未満のビューは200海里以内の最も近い国、それより遠い場合は「外洋」です。ロシアはウラル山脈（東経60度）で欧州とアジアに分けています。重なり（IoU）が0.5を超えるビューは同じ「地点」として数えます。エンディング（フレーム 6,563〜6,955、1つの固定ビュー）は数えていません。</p>
+    <h2>面積</h2><p>表示した範囲は、全ビューを重ね合わせた和集合の測地線面積です。複数のビューに映る場所も1回だけ数えます。8.3百万km²で、海を含む地球の表面積の約1.6%です。<br>訂正: Land &amp; Water 版の動画の統計では「AREA SHOWN 24.2 million km²」と表示していますが、これは各ビューの面積の合計で、重なりを重複して数えた値でした。正しくは上記の値です。</p>
     <h2>データ</h2><p>陸と水: G. E. Kindermann (2025) 全球 0.3秒角 陸水マスク, <a href="https://doi.org/10.5281/zenodo.14899246">doi:10.5281/zenodo.14899246</a>, CC BY 4.0 ／ 境界・地名: <a href="https://www.naturalearthdata.com/">Natural Earth</a>（パブリックドメイン）／ 背景地図: <a href="https://openfreemap.org">OpenFreeMap</a> © <a href="https://openmaptiles.org/">OpenMapTiles</a>, データ © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> ／ 地図表示: <a href="https://maplibre.org/">MapLibre GL JS</a>（BSD-3）</p>
     <p><a href="data/frames.csv" download>全フレームの一覧 (CSV)</a> · <a href="https://github.com/ikuto32/bad-apple-earth-map">ソースコード (GitHub)</a></p>` : `
     <h2>About this map</h2><p>Every frame of “<a href="https://youtu.be/nw02Enk8o1I">Bad Apple!! but every frame is a real place on Earth (Satellite Imagery)</a>”. Each outline is the exact real-world area (drawn extent) whose land and water matched a frame’s silhouette. Colours show the continent. Frame numbers and times match the video.</p>
     <h2>How countries are assigned</h2><p>Each view’s quadrilateral is intersected with Natural Earth 1:10m admin-0 map units; the country or territory with the largest geodesic land overlap is used (de facto boundaries; no position on sovereignty is implied). Views with under 2 % land take the nearest country within 200 nautical miles, otherwise “Open ocean”. Russia is split at the Urals (60° E). Views overlapping with IoU &gt; 0.5 count as one place. The ending credits (frames 6,563–6,955, one fixed view) are not counted.</p>
+    <h2>Area</h2><p>The area covered is the geodesic area of the union of all views: a place shown in many views is counted once. It is 8.3 million km², about 1.6 % of Earth’s surface (oceans included).<br>Correction: the land &amp; water video’s statistics show “AREA SHOWN 24.2 million km²”. That was the sum of every view’s area, counting overlaps repeatedly; the figure above is the correct one.</p>
     <h2>Data</h2><p>Land/water: G. E. Kindermann (2025) global 0.3″ land/water mask, <a href="https://doi.org/10.5281/zenodo.14899246">doi:10.5281/zenodo.14899246</a>, CC BY 4.0 · Boundaries &amp; places: <a href="https://www.naturalearthdata.com/">Natural Earth</a> (public domain) · Basemap: <a href="https://openfreemap.org">OpenFreeMap</a> © <a href="https://openmaptiles.org/">OpenMapTiles</a>, data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · Map rendering: <a href="https://maplibre.org/">MapLibre GL JS</a> (BSD-3)</p>
     <p><a href="data/frames.csv" download>Every frame as CSV</a> · <a href="https://github.com/ikuto32/bad-apple-earth-map">Source on GitHub</a></p>`;
 }
